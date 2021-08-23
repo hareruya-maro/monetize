@@ -22,3 +22,7 @@ yarn run start
 yarn run ios
 yarn run android
 ```
+
+# 不具合など
+うまくいかない・動かないなどありましたら、Issueを作成していただければと思います。
+または、[Twitter](https://twitter.com/HAL1986____)等でご連絡ください。
