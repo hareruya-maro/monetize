@@ -11,13 +11,16 @@ type Props = NativeStackScreenProps<StackParamList, 'Purchase'>;
 
 export default function RevenueCatTest(props: Props) {
 
+    // 画面表示用。通常時は¥200としている。
     const [price, setPrice] = useState('¥200')
     const [rcPackage, setRcPackage] = useState<PurchasesPackage>();
 
+    // プレミアムユーザーかどうかを保持するContext
     const { isPremium, setPremium } = useContext(PremiumContext);
 
     useEffect(() => {
         try {
+            // 現在提供しているプランをRevenueCatから取得する
             Purchases.getOfferings().then(offerings => {
                 if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
                     console.log(offerings.current.monthly)
@@ -37,6 +40,7 @@ export default function RevenueCatTest(props: Props) {
         }
     }, [])
 
+    /** 購入処理 */
     const purchase = async () => {
         console.log('purchase')
         // Using Offerings/Packages
@@ -98,10 +102,10 @@ export default function RevenueCatTest(props: Props) {
                     </Card.Content>
                 </Card>
                 <View style={{ margin: 16 }}>
-                    <Button mode='contained' onPress={purchase}>購入する</Button>
+                    <Button mode='contained' onPress={purchase} disabled={isPremium}>{isPremium ? '購入済み' : '購入する'}</Button>
                 </View>
                 <View style={{ margin: 16 }}>
-                    <Button mode='outlined' onPress={restore}>復元する</Button>
+                    <Button mode='outlined' onPress={restore} disabled={isPremium}>{isPremium ? '購入済み' : '復元する'}</Button>
                 </View>
             </ScrollView>
             <SafeAreaView />

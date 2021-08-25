@@ -67,7 +67,7 @@ export default function App() {
   useEffect(() => {
     // SDKの初期化処理
     Purchases.setDebugLogsEnabled(true);
-    Purchases.setup("htTthpNvRtFiIFiJoNJTFQRHikASFRHV");
+    Purchases.setup("xxxxxxxxxxxxxxxxxxxx");
 
     // すでに購入ずみのか起動時に取得して反映する
     Purchases.getPurchaserInfo()
