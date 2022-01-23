@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Platform, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { Appbar, Title } from 'react-native-paper';
 import Purchases from 'react-native-purchases';
 import { PremiumContext } from './PremiumContext';
@@ -67,7 +67,11 @@ export default function App() {
   useEffect(() => {
     // SDKの初期化処理
     Purchases.setDebugLogsEnabled(true);
-    Purchases.setup("xxxxxxxxxxxxxxxxxxxx");
+    if (Platform.OS === 'ios') {
+      await Purchases.setup("public_ios_sdk_key");
+    } else if (Platform.OS === 'android') {
+      await Purchases.setup("public_google_sdk_key");
+    }
 
     // すでに購入ずみのか起動時に取得して反映する
     Purchases.getPurchaserInfo()
