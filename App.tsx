@@ -6,14 +6,14 @@ import { Appbar, Title } from 'react-native-paper';
 import Purchases from 'react-native-purchases';
 import { PremiumContext } from './PremiumContext';
 import AdmobBannerTest from './screens/AdmobBannerTest';
-import AdmobInterstatialTest from './screens/AdmobInterstatialTest';
+import AdmobInterstitialTest from './screens/AdmobInterstitialTest';
 import AdmobRewardTest from './screens/AdmobRewardTest';
 import RevenueCatTest from './screens/RevenueCatTest';
 
 export type StackParamList = {
   Home: undefined;
   Banner: undefined;
-  Interstatial: undefined;
+  Interstitial: undefined;
   Reward: undefined;
   Purchase: undefined;
 };
@@ -41,7 +41,7 @@ function HomeScreen(props: Props) {
               <Button title='バナーテスト' color='white' onPress={() => props.navigation.navigate('Banner')} />
             </View>
             <View style={{ backgroundColor: '#f1be42', margin: 32, borderRadius: 10 }}>
-              <Button title='インターステイシャルテスト' color='black' onPress={() => props.navigation.navigate('Interstatial')} />
+              <Button title='インターステイシャルテスト' color='black' onPress={() => props.navigation.navigate('Interstitial')} />
             </View>
             <View style={{ backgroundColor: '#5384ec', margin: 32, borderRadius: 10 }}>
               <Button title='リワードテスト' color='white' onPress={() => props.navigation.navigate('Reward')} />
@@ -68,9 +68,9 @@ export default function App() {
     // SDKの初期化処理
     Purchases.setDebugLogsEnabled(true);
     if (Platform.OS === 'ios') {
-      await Purchases.setup("public_ios_sdk_key");
+      Purchases.setup("public_ios_sdk_key");
     } else if (Platform.OS === 'android') {
-      await Purchases.setup("public_google_sdk_key");
+      Purchases.setup("public_google_sdk_key");
     }
 
     // すでに購入ずみのか起動時に取得して反映する
@@ -95,7 +95,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Banner" component={AdmobBannerTest} />
-          <Stack.Screen name="Interstatial" component={AdmobInterstatialTest} />
+          <Stack.Screen name="Interstitial" component={AdmobInterstitialTest} />
           <Stack.Screen name="Reward" component={AdmobRewardTest} />
           <Stack.Screen name="Purchase" component={RevenueCatTest} />
         </Stack.Navigator>

@@ -5,9 +5,9 @@ import { Button, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackParamList } from '../App';
 
-type Props = NativeStackScreenProps<StackParamList, 'Interstatial'>;
+type Props = NativeStackScreenProps<StackParamList, 'Interstitial'>;
 
-export default function AdmobInterstatialTest(props: Props) {
+export default function AdmobInterstitialTest(props: Props) {
 
     useEffect(() => {
         // インタースティシャルの初期化（テスト用ID）
@@ -30,7 +30,7 @@ export default function AdmobInterstatialTest(props: Props) {
         }
     }, [])
 
-    const viewInterstatial = useCallback(async () => {
+    const viewInterstitial = useCallback(async () => {
 
         // 広告の要求
         await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
@@ -47,7 +47,7 @@ export default function AdmobInterstatialTest(props: Props) {
             </Appbar.Header>
             <ScrollView style={styles.container}>
                 <View style={{ backgroundColor: 'blue', margin: 32, borderRadius: 10 }}>
-                    <Button title='インタースティシャル表示テスト' color='white' onPress={viewInterstatial} />
+                    <Button title='インタースティシャル表示テスト' color='white' onPress={viewInterstitial} />
                 </View>
 
             </ScrollView>
