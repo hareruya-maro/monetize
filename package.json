@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "start": "expo start --dev-client",
+    "start": "react-native start",
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator=\"iPhone 13 Pro Max\"",
     "web": "expo start --web",
     "eject": "expo eject"
   },

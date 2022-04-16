@@ -6,17 +6,14 @@ PODS:
     - Google-Mobile-Ads-SDK (= 7.69.0)
   - EXApplication (4.0.2):
     - ExpoModulesCore
-  - EXConstants (12.0.0):
+  - EXConstants (13.0.2):
     - ExpoModulesCore
   - EXErrorRecovery (3.0.5):
     - ExpoModulesCore
-  - EXFileSystem (13.0.3):
+  - EXFileSystem (13.1.4):
     - ExpoModulesCore
   - EXFont (10.0.5):
     - ExpoModulesCore
-  - EXImageLoader (3.1.1):
-    - ExpoModulesCore
-    - React-Core
   - EXJSONUtils (0.2.1)
   - EXKeepAwake (10.0.2):
     - ExpoModulesCore
@@ -24,8 +21,9 @@ PODS:
     - EXJSONUtils
   - Expo (44.0.6):
     - ExpoModulesCore
-  - ExpoModulesCore (0.4.10):
+  - ExpoModulesCore (0.6.5):
     - React-Core
+    - ReactCommon/turbomodule/core
   - EXSplashScreen (0.14.2):
     - ExpoModulesCore
     - React-Core
@@ -386,9 +384,6 @@ PODS:
   - RNScreens (3.10.2):
     - React-Core
     - React-RCTImage
-  - UMAppLoader (3.0.1)
-  - UMTaskManagerInterface (7.0.3):
-    - ExpoModulesCore
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -399,7 +394,6 @@ DEPENDENCIES:
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
-  - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
@@ -442,8 +436,6 @@ DEPENDENCIES:
   - RNPurchases (from `../node_modules/react-native-purchases`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
-  - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
-  - UMTaskManagerInterface (from `../node_modules/unimodules-task-manager-interface/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -474,8 +466,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-file-system/ios"
   EXFont:
     :path: "../node_modules/expo-font/ios"
-  EXImageLoader:
-    :path: "../node_modules/expo-image-loader/ios"
   EXJSONUtils:
     :path: "../node_modules/expo-json-utils/ios"
   EXKeepAwake:
@@ -556,10 +546,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
-  UMAppLoader:
-    :path: "../node_modules/unimodules-app-loader/ios"
-  UMTaskManagerInterface:
-    :path: "../node_modules/unimodules-task-manager-interface/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -568,16 +554,15 @@ SPEC CHECKSUMS:
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   EXAdsAdMob: 7e8f57bede074538cc091d595fefbe22b6643be7
   EXApplication: 54fe5bd6268d697771645e8f1aef8b806a65247a
-  EXConstants: b14b472da01b8191c1cfe86f29caa1e0c6a46bed
+  EXConstants: 88bf79622fbd9b476c96d8ec57fe97ca44fe8e3c
   EXErrorRecovery: b0d7582714a2cc896e94a2308a356f94dbf14ef7
-  EXFileSystem: 99aac7962c11c680681819dd9cbca24e20e5b1e7
+  EXFileSystem: 08a3033ac372b6346becf07839e1ccef26fb1058
   EXFont: 2597c10ac85a69d348d44d7873eccf5a7576ef5e
-  EXImageLoader: 347b72c2ec2df65120ccec40ea65a4c4f24317ff
   EXJSONUtils: 5ee0d5cf76da70ad86f0be1a41cc70f47d69e06f
   EXKeepAwake: bf48d7f740a5cd2befed6cf9a49911d385c6c47d
   EXManifests: d3464cd2278f4a19cd80c1aa673231570b534c11
   Expo: 534e51e607aba8229293297da5585f4b26f50fa1
-  ExpoModulesCore: c9438f6add0fb7b04b7c64eb97a833d2752a7834
+  ExpoModulesCore: 32c0ccb47f477d330ee93db72505380adf0de09a
   EXSplashScreen: 21669e598804ee810547dbb6692c8deb5dd8dbf3
   EXStructuredHeaders: 4993087b2010dbcc510f5d92555b36f523425e8d
   EXUpdates: bd5fa64f02685ed3e96be86b5ca350cdc2cd8d02
@@ -622,10 +607,8 @@ SPEC CHECKSUMS:
   RNPurchases: fd7e85ca54a006b0894cfe0698f261bcd499abe3
   RNReanimated: 0e5ef4a7e4e79f84efbe5b40771c31044c51e7d0
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
-  UMAppLoader: 2ee9f1278d315672f4854c6a2310aa9988f61f72
-  UMTaskManagerInterface: 5654c50e68af11b19b9d05452bacf23d19b3f30f
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
 
-PODFILE CHECKSUM: 812ba045172dc37926e23852d2dfeabaab41f2ca
+PODFILE CHECKSUM: 155fcf7dadfe6c4a6564f7a8a2b4d9b3fefae42e
 
 COCOAPODS: 1.11.3
