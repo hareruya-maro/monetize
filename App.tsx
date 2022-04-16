@@ -1,10 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  getPermissionsAsync,
+  PermissionStatus,
+  requestPermissionsAsync
+} from "expo-ads-admob";
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Platform, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { Appbar, Title } from 'react-native-paper';
 import Purchases from 'react-native-purchases';
-import { PremiumContext } from './PremiumContext';
+import { PremiumContext, TrackingContext } from './PremiumContext';
 import AdmobBannerTest from './screens/AdmobBannerTest';
 import AdmobInterstitialTest from './screens/AdmobInterstitialTest';
 import AdmobRewardTest from './screens/AdmobRewardTest';
@@ -63,8 +68,27 @@ function HomeScreen(props: Props) {
 export default function App() {
 
   const [isPremium, setPremium] = useState(false);
+  const [trackingStatus, setTrackingStatus] = useState<PermissionStatus>(PermissionStatus.UNDETERMINED);
 
   useEffect(() => {
+
+    // App Transparency対応
+    getPermissionsAsync().then(res => {
+      // 許可されていない（res.granted === trueでない）かつ、
+      // res.statusがUNDETERMINED（未定）またはcanAskAgain（再確認が可能）の場合、
+      // 確認ダイアログを表示する
+      if (!res.granted && (res.status === PermissionStatus.UNDETERMINED) || res.canAskAgain) {
+        requestPermissionsAsync()
+          .then(res => {
+            // 確認ダイアログの結果を設定する
+            setTrackingStatus(res.status);
+          });
+      } else {
+        // 確認ダイアログが表示できない場合は今のステータスをそのまま設定する
+        setTrackingStatus(res.status);
+      }
+    });
+
     // SDKの初期化処理
     Purchases.setDebugLogsEnabled(true);
     if (Platform.OS === 'ios') {
@@ -91,15 +115,17 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <PremiumContext.Provider value={{ isPremium, setPremium }}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Banner" component={AdmobBannerTest} />
-          <Stack.Screen name="Interstitial" component={AdmobInterstitialTest} />
-          <Stack.Screen name="Reward" component={AdmobRewardTest} />
-          <Stack.Screen name="Purchase" component={RevenueCatTest} />
-        </Stack.Navigator>
-      </PremiumContext.Provider>
+      <TrackingContext.Provider value={{ trackingStatus, setTrackingStatus }}>
+        <PremiumContext.Provider value={{ isPremium, setPremium }}>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Banner" component={AdmobBannerTest} />
+            <Stack.Screen name="Interstitial" component={AdmobInterstitialTest} />
+            <Stack.Screen name="Reward" component={AdmobRewardTest} />
+            <Stack.Screen name="Purchase" component={RevenueCatTest} />
+          </Stack.Navigator>
+        </PremiumContext.Provider>
+      </TrackingContext.Provider>
     </NavigationContainer>
   );
 }

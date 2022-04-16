@@ -1,15 +1,18 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AdMobRewarded } from 'expo-ads-admob';
-import React, { useEffect, useState } from 'react';
+import { AdMobRewarded, PermissionStatus } from 'expo-ads-admob';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackParamList } from '../App';
+import { TrackingContext } from '../PremiumContext';
 
 type Props = NativeStackScreenProps<StackParamList, 'Reward'>;
 
 export default function AdmobRewardTest(props: Props) {
 
     const [reward, setReward] = useState(0);
+
+    const { trackingStatus } = useContext(TrackingContext);
 
     useEffect(() => {
         // リワードの初期化（テスト用ID）
@@ -53,7 +56,7 @@ export default function AdmobRewardTest(props: Props) {
     const viewReward = async () => {
 
         // 広告の要求
-        await AdMobRewarded.requestAdAsync({ servePersonalizedAds: true });
+        await AdMobRewarded.requestAdAsync({ servePersonalizedAds: trackingStatus === PermissionStatus.GRANTED });
 
         // 広告の表示
         await AdMobRewarded.showAdAsync();

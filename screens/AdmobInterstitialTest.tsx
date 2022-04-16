@@ -1,13 +1,16 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AdMobInterstitial } from 'expo-ads-admob';
-import React, { useCallback, useEffect } from 'react';
+import { AdMobInterstitial, PermissionStatus } from 'expo-ads-admob';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Button, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { StackParamList } from '../App';
+import { TrackingContext } from '../PremiumContext';
 
 type Props = NativeStackScreenProps<StackParamList, 'Interstitial'>;
 
 export default function AdmobInterstitialTest(props: Props) {
+
+    const { trackingStatus } = useContext(TrackingContext);
 
     useEffect(() => {
         // インタースティシャルの初期化（テスト用ID）
@@ -33,7 +36,7 @@ export default function AdmobInterstitialTest(props: Props) {
     const viewInterstitial = useCallback(async () => {
 
         // 広告の要求
-        await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
+        await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: trackingStatus === PermissionStatus.GRANTED });
 
         // 広告の表示
         await AdMobInterstitial.showAdAsync();

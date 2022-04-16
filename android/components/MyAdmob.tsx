@@ -1,7 +1,7 @@
-import { AdMobBanner } from "expo-ads-admob";
+import { AdMobBanner, PermissionStatus } from "expo-ads-admob";
 import React, { useContext } from "react";
 import { Platform, View } from "react-native";
-import { PremiumContext } from "../../PremiumContext";
+import { PremiumContext, TrackingContext } from "../../PremiumContext";
 
 interface Props {
     bannerSize?:
@@ -12,6 +12,7 @@ interface Props {
 export default function MyAdmob(props: Props) {
 
     const { isPremium } = useContext(PremiumContext);
+    const { trackingStatus } = useContext(TrackingContext);
 
     // テスト用のID
     // 実機テスト時に誤ってタップしたりすると、広告の配信停止をされたりするため、テスト時はこちらを設定する
@@ -38,7 +39,7 @@ export default function MyAdmob(props: Props) {
         <AdMobBanner
             {...props}
             adUnitID={testUnitID}
-            servePersonalizedAds // パーソナライズされた広告の可否。App Tracking Transparencyの対応時に使用。
+            servePersonalizedAds={trackingStatus === PermissionStatus.GRANTED}
         />
     )
 }
