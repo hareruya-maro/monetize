@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start --dev-client",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
@@ -23,7 +23,6 @@
     "react-native-reanimated": "~2.3.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
-    "react-native-unimodules": "~0.15.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
