@@ -3,11 +3,6 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import {
-  getPermissionsAsync,
-  PermissionStatus,
-  requestPermissionsAsync,
-} from "expo-ads-admob";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Platform,
@@ -16,6 +11,12 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import mobileAds, {
+  AdsConsent,
+  AdsConsentDebugGeography,
+  AdsConsentStatus,
+  MaxAdContentRating,
+} from "react-native-google-mobile-ads";
 import { Appbar, Button, Title } from "react-native-paper";
 import Purchases from "react-native-purchases";
 import { PremiumContext, TrackingContext } from "./PremiumContext";
@@ -107,27 +108,51 @@ function HomeScreen(props: Props) {
 
 export default function App() {
   const [isPremium, setPremium] = useState(false);
-  const [trackingStatus, setTrackingStatus] = useState<PermissionStatus>(
-    PermissionStatus.UNDETERMINED
-  );
+  const [nonPersonalizedOnly, setNonPersonalizedOnly] = useState(true);
 
   useEffect(() => {
-    // App Transparency対応
-    getPermissionsAsync().then((res) => {
-      // 許可されていない（res.granted === trueでない）かつ、
-      // res.statusがUNDETERMINED（未定）またはcanAskAgain（再確認が可能）の場合、
-      // 確認ダイアログを表示する
+    mobileAds()
+      .setRequestConfiguration({
+        // Update all future requests suitable for parental guidance
+        maxAdContentRating: MaxAdContentRating.G,
+
+        // Indicates that you want your content treated as child-directed for purposes of COPPA.
+        tagForChildDirectedTreatment: false,
+
+        // Indicates that you want the ad request to be handled in a
+        // manner suitable for users under the age of consent.
+        tagForUnderAgeOfConsent: false,
+
+        // An array of test device IDs to allow.
+        testDeviceIdentifiers: ["EMULATOR"],
+      })
+      .then(() => {
+        // Request config successfully set!
+        mobileAds()
+          .initialize()
+          .then((adapterStatuses) => {
+            // Initialization complete!
+          });
+      });
+
+    AdsConsent.requestInfoUpdate({
+      debugGeography: AdsConsentDebugGeography.EEA,
+      testDeviceIdentifiers: ["TEST-DEVICE-HASHED-ID"],
+    }).then(async (consentInfo) => {
+      let status = consentInfo.status;
       if (
-        (!res.granted && res.status === PermissionStatus.UNDETERMINED) ||
-        res.canAskAgain
+        consentInfo.isConsentFormAvailable &&
+        status === AdsConsentStatus.REQUIRED
       ) {
-        requestPermissionsAsync().then((res) => {
-          // 確認ダイアログの結果を設定する
-          setTrackingStatus(res.status);
-        });
-      } else {
-        // 確認ダイアログが表示できない場合は今のステータスをそのまま設定する
-        setTrackingStatus(res.status);
+        const result = await AdsConsent.showForm();
+        status = result.status;
+      }
+
+      if (
+        consentInfo.status === AdsConsentStatus.OBTAINED ||
+        status === AdsConsentStatus.OBTAINED
+      ) {
+        setNonPersonalizedOnly(false);
       }
     });
 
@@ -156,7 +181,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <TrackingContext.Provider value={{ trackingStatus, setTrackingStatus }}>
+      <TrackingContext.Provider
+        value={{ nonPersonalizedOnly, setNonPersonalizedOnly }}
+      >
         <PremiumContext.Provider value={{ isPremium, setPremium }}>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={HomeScreen} />
