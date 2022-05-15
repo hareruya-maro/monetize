@@ -69,7 +69,6 @@ export default function AdmobInterstitialTest(props: Props) {
         </Title>
         <Button
           mode="contained"
-          color="blue"
           style={{ margin: 32, borderRadius: 10 }}
           onPress={viewInterstitial}
         >

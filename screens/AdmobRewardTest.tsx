@@ -79,7 +79,6 @@ export default function AdmobRewardTest(props: Props) {
         </Title>
         <Button
           mode="contained"
-          color="blue"
           style={{ margin: 32, borderRadius: 10 }}
           onPress={viewReward}
         >
