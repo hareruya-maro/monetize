@@ -113,28 +113,26 @@ export default function App() {
   useEffect(() => {
     mobileAds()
       .setRequestConfiguration({
-        // Update all future requests suitable for parental guidance
+        // レーティング（Gは全年齢）
         maxAdContentRating: MaxAdContentRating.G,
-
-        // Indicates that you want your content treated as child-directed for purposes of COPPA.
+        // COPPA対応
         tagForChildDirectedTreatment: false,
-
-        // Indicates that you want the ad request to be handled in a
-        // manner suitable for users under the age of consent.
+        // 対象年齢指定
         tagForUnderAgeOfConsent: false,
-
-        // An array of test device IDs to allow.
+        // テストデバイスID
         testDeviceIdentifiers: ["EMULATOR"],
       })
       .then(() => {
-        // Request config successfully set!
+        // 設定したので初期化処理を実行
         mobileAds()
           .initialize()
           .then((adapterStatuses) => {
-            // Initialization complete!
+            // 初期化完了
+            console.log("mobileAds initialize", adapterStatuses);
           });
       });
 
+    // ATTとGDPRの同意状態を取得
     AdsConsent.requestInfoUpdate({
       debugGeography: AdsConsentDebugGeography.EEA,
       testDeviceIdentifiers: ["TEST-DEVICE-HASHED-ID"],
@@ -144,6 +142,7 @@ export default function App() {
         consentInfo.isConsentFormAvailable &&
         status === AdsConsentStatus.REQUIRED
       ) {
+        // 同意状態が必要な場合はダイアログを表示する
         const result = await AdsConsent.showForm();
         status = result.status;
       }
@@ -152,6 +151,7 @@ export default function App() {
         consentInfo.status === AdsConsentStatus.OBTAINED ||
         status === AdsConsentStatus.OBTAINED
       ) {
+        // 同意が取得できた場合はNonPersonalizedOnlyをfalseにする(トラッキング取得する)
         setNonPersonalizedOnly(false);
       }
     });

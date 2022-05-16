@@ -45,7 +45,7 @@ export default function AdmobRewardTest(props: Props) {
   }, [load]);
 
   useEffect(() => {
-    // 閉じられたら次の広告をロードする
+    // 閉じられたら次の広告をロードしておく
     if (isClosed) {
       load();
     }
@@ -61,6 +61,7 @@ export default function AdmobRewardTest(props: Props) {
     }
   }, [isEarnedReward]);
 
+  // 広告の表示
   const viewReward = async () => {
     if (isLoaded) {
       show();

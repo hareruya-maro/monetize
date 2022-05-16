@@ -42,7 +42,7 @@ export default function AdmobInterstitialTest(props: Props) {
   }, [load]);
 
   useEffect(() => {
-    // 閉じられたら次の広告をロードする
+    // 閉じられたら次の広告をロードしておく
     if (isClosed) {
       load();
     }
