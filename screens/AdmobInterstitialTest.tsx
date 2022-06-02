@@ -4,7 +4,7 @@ import { Platform, StyleSheet, View } from "react-native";
 import { TestIds, useInterstitialAd } from "react-native-google-mobile-ads";
 import { Appbar, Button, Title } from "react-native-paper";
 import { StackParamList } from "../App";
-import { TrackingContext } from "../PremiumContext";
+import { TrackingContext } from "../AppContext";
 
 type Props = NativeStackScreenProps<StackParamList, "Interstitial">;
 

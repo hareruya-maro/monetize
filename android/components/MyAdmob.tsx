@@ -5,7 +5,7 @@ import {
   BannerAdSize,
   TestIds,
 } from "react-native-google-mobile-ads";
-import { PremiumContext, TrackingContext } from "../../PremiumContext";
+import { PremiumContext, TrackingContext } from "../../AppContext";
 
 interface Props {
   size: BannerAdSize;

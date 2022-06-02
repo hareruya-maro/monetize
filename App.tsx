@@ -19,7 +19,7 @@ import mobileAds, {
 } from "react-native-google-mobile-ads";
 import { Appbar, Button, Title } from "react-native-paper";
 import Purchases from "react-native-purchases";
-import { PremiumContext, TrackingContext } from "./PremiumContext";
+import { PremiumContext, TrackingContext } from "./AppContext";
 import AdmobBannerTest from "./screens/AdmobBannerTest";
 import AdmobInterstitialTest from "./screens/AdmobInterstitialTest";
 import AdmobRewardTest from "./screens/AdmobRewardTest";
