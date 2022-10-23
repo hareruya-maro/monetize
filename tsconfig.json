@@ -3,11 +3,12 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": ["dom", "esnext"],
+    "target": "ES6",
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "experimentalDecorators": true
   },
   "exclude": ["node_modules"],
   "extends": "expo/tsconfig.base"

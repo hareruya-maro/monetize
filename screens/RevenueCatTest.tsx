@@ -41,7 +41,7 @@ export default function RevenueCatTest(props: Props) {
           console.log(offerings.current.monthly);
           // 価格変更をアプリの変更なしで対応可能なように、offeringから価格文字列を取得する
           if (offerings.current.monthly) {
-            setPrice(offerings.current.monthly?.product.price_string);
+            setPrice(offerings.current.monthly?.product.priceString);
             setRcPackage(offerings.current.monthly);
           }
           // 年次（annual）の場合〜〜などと続けるか、完全に可変に対応する場合は、availablePackagesなどを利用して実装する
@@ -62,16 +62,22 @@ export default function RevenueCatTest(props: Props) {
     try {
       // Packageが取得できているかチェックする
       if (rcPackage) {
-        const { purchaserInfo, productIdentifier } =
-          await Purchases.purchasePackage(rcPackage);
-        if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
+        const purchaseMade = await Purchases.purchasePackage(rcPackage);
+        if (
+          typeof purchaseMade.customerInfo.entitlements.active
+            .my_entitlement_identifier !== "undefined"
+        ) {
           // プレミアム購入ずみの設定をアプリ全体に反映させる
           setPremium(true);
         }
       } else {
         // OfferingとPackageを使わず、product_idを直接指定して購入することも可能
         // 金額変更などを考えていなければ初めはこの実装でも可
-        await Purchases.purchaseProduct("product_id");
+        await Purchases.purchaseProduct(
+          "product_id",
+          null,
+          Purchases.PURCHASE_TYPE.INAPP
+        );
       }
     } catch (e) {
       if (!e.userCancelled) {
@@ -85,8 +91,11 @@ export default function RevenueCatTest(props: Props) {
   const restore = async () => {
     console.log("restore");
     try {
-      const restore = await Purchases.restoreTransactions();
-      if (Object.entries(restore.entitlements.active).length > 0) {
+      const restore = await Purchases.restorePurchases();
+      if (
+        typeof restore.entitlements.active.my_entitlement_identifier !==
+        "undefined"
+      ) {
         // プレミアム購入ずみの設定をアプリ全体に反映させる
         setPremium(true);
         console.log("setPremium");
