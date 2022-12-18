@@ -72,3 +72,5 @@ web-build/
 dist/
 
 # @end expo-cli
+*.tar.gz
+*.app
