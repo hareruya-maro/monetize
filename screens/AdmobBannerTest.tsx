@@ -3,8 +3,8 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import { BannerAdSize } from "react-native-google-mobile-ads";
 import { Appbar, Surface, Title } from "react-native-paper";
-import MyAdmob from "../android/components/MyAdmob";
 import { StackParamList } from "../App";
+import MyAdmob from "../components/MyAdmob";
 
 type Props = NativeStackScreenProps<StackParamList, "Banner">;
 

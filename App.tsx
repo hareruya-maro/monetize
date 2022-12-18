@@ -35,7 +35,7 @@ export type StackParamList = {
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
-type Props = NativeStackScreenProps<StackParamList, "Banner">;
+type Props = NativeStackScreenProps<StackParamList, "Home">;
 
 function HomeScreen(props: Props) {
   const { isPremium } = useContext(PremiumContext);
@@ -158,16 +158,17 @@ export default function App() {
 
     // SDKの初期化処理
     Purchases.setDebugLogsEnabled(true);
-    if (Platform.OS === "ios") {
-      Purchases.setup("public_ios_sdk_key");
-    } else if (Platform.OS === "android") {
-      Purchases.setup("public_google_sdk_key");
-    }
+    Purchases.configure({
+      apiKey: Platform.select({
+        ios: "public_ios_sdk_key",
+        android: "public_google_sdk_key",
+      })!,
+    });
 
     // すでに購入ずみのか起動時に取得して反映する
-    Purchases.getPurchaserInfo()
-      .then((purchaserInfo) => {
-        if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
+    Purchases.getCustomerInfo()
+      .then((customerInfo) => {
+        if (Object.entries(customerInfo.entitlements.active).length > 0) {
           // プレミアム購入ずみの設定をアプリ全体に反映させる
           setPremium(true);
           console.log("setPremium true");
