@@ -60,12 +60,6 @@ export default function AdmobBannerTest(props: Props) {
         </Surface>
         <Surface style={{ marginVertical: 8, paddingVertical: 8 }}>
           <Title style={{ textAlign: "center", margin: 10 }}>
-            size={BannerAdSize.FLUID}
-          </Title>
-          <MyAdmob size={BannerAdSize.FLUID} />
-        </Surface>
-        <Surface style={{ marginVertical: 8, paddingVertical: 8 }}>
-          <Title style={{ textAlign: "center", margin: 10 }}>
             size={BannerAdSize.INLINE_ADAPTIVE_BANNER}
           </Title>
           <MyAdmob size={BannerAdSize.INLINE_ADAPTIVE_BANNER} />
