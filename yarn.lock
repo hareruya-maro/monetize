@@ -5835,10 +5835,10 @@ react-native-paper@^5.5.0:
     color "^3.1.2"
     use-latest-callback "^0.1.5"
 
-react-native-purchases@^5.13.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/react-native-purchases/-/react-native-purchases-5.13.0.tgz#98625f108f31cb46426e100722d686c4875fa8c4"
-  integrity sha512-8Z+5vL/nhDRI2ivT9GikfnY1KtE/5aF4ZQw+jTP5UVGpAcEi2uL2tNUJKTHLganwx3UyjQeTfilP12Mn02EBCQ==
+react-native-purchases@^5.13.1:
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/react-native-purchases/-/react-native-purchases-5.13.2.tgz#9708ab4f26aeeec5e1380fa60cc15f68e523e491"
+  integrity sha512-9iwiRuIJtCpRaX67QjNdfr4UlXBeOyqsHrXCg9DbIm07IqtGVRiRXhE5mLq3hDbly9VYd7FON/hArFGwQPWn7w==
 
 react-native-reanimated@~2.14.4:
   version "2.14.4"
