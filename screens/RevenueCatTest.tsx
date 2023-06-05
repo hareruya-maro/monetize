@@ -41,7 +41,7 @@ export default function RevenueCatTest(props: Props) {
           console.log(offerings.current.monthly);
           // 価格変更をアプリの変更なしで対応可能なように、offeringから価格文字列を取得する
           if (offerings.current.monthly) {
-            setPrice(offerings.current.monthly?.product.price_string);
+            setPrice(offerings.current.monthly?.product.priceString);
             setRcPackage(offerings.current.monthly);
           }
           // 年次（annual）の場合〜〜などと続けるか、完全に可変に対応する場合は、availablePackagesなどを利用して実装する
@@ -62,9 +62,8 @@ export default function RevenueCatTest(props: Props) {
     try {
       // Packageが取得できているかチェックする
       if (rcPackage) {
-        const { purchaserInfo, productIdentifier } =
-          await Purchases.purchasePackage(rcPackage);
-        if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
+        const { customerInfo } = await Purchases.purchasePackage(rcPackage);
+        if (Object.entries(customerInfo.entitlements.active).length > 0) {
           // プレミアム購入ずみの設定をアプリ全体に反映させる
           setPremium(true);
         }
@@ -74,7 +73,12 @@ export default function RevenueCatTest(props: Props) {
         await Purchases.purchaseProduct("product_id");
       }
     } catch (e) {
-      if (!e.userCancelled) {
+      if (
+        typeof e === "object" &&
+        e !== null &&
+        "userCancelled" in e &&
+        !e.userCancelled
+      ) {
         console.log(e);
         Alert.alert("購入できませんでした");
       }
@@ -85,7 +89,7 @@ export default function RevenueCatTest(props: Props) {
   const restore = async () => {
     console.log("restore");
     try {
-      const restore = await Purchases.restoreTransactions();
+      const restore = await Purchases.restorePurchases();
       if (Object.entries(restore.entitlements.active).length > 0) {
         // プレミアム購入ずみの設定をアプリ全体に反映させる
         setPremium(true);
