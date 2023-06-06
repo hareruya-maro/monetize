@@ -18,7 +18,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
-    "react-native-gesture-handler": "~2.9.0",
+    "react-native-gesture-handler": "~2.10.0",
     "react-native-google-mobile-ads": "^11.0.0",
     "react-native-paper": "^5.8.0",
     "react-native-purchases": "^5.15.0",
