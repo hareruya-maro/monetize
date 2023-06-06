@@ -23,7 +23,7 @@
     "react-native-paper": "^5.8.0",
     "react-native-purchases": "^5.15.0",
     "react-native-reanimated": "~2.14.4",
-    "react-native-safe-area-context": "4.5.0",
+    "react-native-safe-area-context": "4.5.3",
     "react-native-screens": "~3.20.0",
     "react-native-web": "~0.18.10"
   },
