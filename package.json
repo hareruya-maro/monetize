@@ -12,7 +12,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "expo": "^48.0.19",
     "expo-dev-client": "~2.2.1",
-    "expo-splash-screen": "~0.18.2",
+    "expo-splash-screen": "~0.20.2",
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.4",
     "react": "18.2.0",
