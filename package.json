@@ -22,7 +22,7 @@
     "react-native-google-mobile-ads": "^11.6.2",
     "react-native-paper": "^5.9.1",
     "react-native-purchases": "^6.4.0",
-    "react-native-reanimated": "~3.3.0",
+    "react-native-reanimated": "~3.4.0",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6"
