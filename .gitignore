@@ -74,3 +74,4 @@ dist/
 # @end expo-cli
 *.tar.gz
 *.app
+.yarn
