@@ -17,7 +17,7 @@
     "expo-updates": "~0.24.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.4",
+    "react-native": "0.74.0",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-google-mobile-ads": "^12.10.0",
     "react-native-paper": "^5.12.3",
