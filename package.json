@@ -10,9 +10,9 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
-    "expo": "^50.0.6",
+    "expo": "^51.0.0",
     "expo-dev-client": "~3.3.8",
-    "expo-splash-screen": "~0.26.4",
+    "expo-splash-screen": "~0.27.1",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.10",
     "react": "18.2.0",
