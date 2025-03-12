@@ -13,12 +13,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.apps.hal.monetize"
+      "bundleIdentifier": "com.apps.hal.monetize",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -34,11 +35,17 @@
       "eas": {
         "projectId": "d6bda6c5-9ebf-48f9-9275-72d2bb6343f7"
       }
-    }
-  },
-  "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-5301151247209995~1714151435",
-    "ios_app_id": "ca-app-pub-5301151247209995~1419649721",
-    "delay_app_measurement_init": true
+    },
+    "plugins": [
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-5301151247209995~1714151435",
+          "iosAppId": "ca-app-pub-5301151247209995~1419649721",
+          "userTrackingUsageDescription": "関連性の高い広告を表示するためにIDをトラッキングいたします。",
+          "delayAppMeasurementInit": true
+        }
+      ]
+    ]
   }
 }
