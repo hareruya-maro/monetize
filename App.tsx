@@ -18,7 +18,8 @@ import mobileAds, {
   MaxAdContentRating,
 } from "react-native-google-mobile-ads";
 import { Appbar, Button, Title } from "react-native-paper";
-import Purchases from "react-native-purchases";
+import Purchases, { LOG_LEVEL } from "react-native-purchases";
+import RevenueCatUI from "react-native-purchases-ui";
 import { PremiumContext, TrackingContext } from "./AppContext";
 import AdmobBannerTest from "./screens/AdmobBannerTest";
 import AdmobInterstitialTest from "./screens/AdmobInterstitialTest";
@@ -54,7 +55,7 @@ function HomeScreen(props: Props) {
             <Title>Admob</Title>
             <Button
               mode="contained"
-              color="#d85140"
+              buttonColor="#d85140"
               style={{
                 margin: 32,
                 borderRadius: 10,
@@ -65,7 +66,7 @@ function HomeScreen(props: Props) {
             </Button>
             <Button
               mode="contained"
-              color="#f1be42"
+              buttonColor="#f1be42"
               style={{
                 margin: 32,
                 borderRadius: 10,
@@ -76,7 +77,7 @@ function HomeScreen(props: Props) {
             </Button>
             <Button
               mode="contained"
-              color="#5384ec"
+              buttonColor="#5384ec"
               style={{
                 margin: 32,
                 borderRadius: 10,
@@ -90,7 +91,7 @@ function HomeScreen(props: Props) {
             <Title>RevenueCat</Title>
             <Button
               mode="contained"
-              color="#e05f60"
+              buttonColor="#e05f60"
               style={{
                 margin: 32,
                 borderRadius: 10,
@@ -98,6 +99,17 @@ function HomeScreen(props: Props) {
               onPress={() => props.navigation.navigate("Purchase")}
             >
               課金テスト
+            </Button>
+            <Button
+              mode="contained"
+              buttonColor="#e05f60"
+              style={{
+                margin: 32,
+                borderRadius: 10,
+              }}
+              onPress={() => RevenueCatUI.presentPaywall()}
+            >
+              PayWallsテスト
             </Button>
           </View>
         </ScrollView>
@@ -157,7 +169,7 @@ export default function App() {
     });
 
     // SDKの初期化処理
-    Purchases.setDebugLogsEnabled(true);
+    Purchases.setLogLevel(LOG_LEVEL.DEBUG);
     Purchases.configure({
       apiKey: Platform.select({
         ios: "public_ios_sdk_key",
